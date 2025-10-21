@@ -1,0 +1,493 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Arc",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -7.745980843904455e-19,
+      "yCenter": 0.025,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0175,
+      "startParam": -0.6119136428711751,
+      "endParam": 2.5417864420337297
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(1,)",
+    "parameters": {
+      "length": "0.035 METER"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Vertical",
+    "references": "(2, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Arc",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -7.745980843904455e-19,
+      "yCenter": 0.025,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0125,
+      "startParam": -1.588678733221668,
+      "endParam": 2.5328072821540917
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(5,)",
+    "parameters": {
+      "length": "0.025 METER"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(6, 2)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": -0.891381082173515,
+      "dirY": 0.45325463742048283,
+      "pntX": -0.01497173495590687,
+      "pntY": 0.03261291487412808,
+      "startParam": -0.00243470366165216,
+      "endParam": -0.001425684129057834
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(9, 2)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": 1.0,
+      "dirY": 0.0,
+      "pntX": 0.00026381807401776314,
+      "pntY": 0.0,
+      "startParam": -0.007763818074017763,
+      "endParam": 0.007236181925982237
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Horizontal",
+    "references": "(12,)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Midpoint",
+    "references": "(12, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Horizontal",
+    "references": "(13, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Arc",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": 0.05115939087477869,
+      "yCenter": -0.010902182737566385,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.045,
+      "startParam": 2.5296790107186204,
+      "endParam": 2.896887031276457
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Tangent",
+    "references": "(15, 1)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(15,)",
+    "parameters": {
+      "length": "0.09 METER"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(17, 3)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(18, 14)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Arc",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": 0.05115939087477869,
+      "yCenter": -0.010902182737566385,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.05966390639443046,
+      "startParam": 2.798189517163891,
+      "endParam": 2.9578336217062158
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(22, 13)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": -0.0035066381739205467,
+      "y": 0.013001938126630487
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(23, 19)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(23, 5)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Arc",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.000312925433939743,
+      "yCenter": 0.007502798004458151,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.005000000000000008,
+      "startParam": 1.5529139203681268,
+      "endParam": 2.798189517163889
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Tangent",
+    "references": "(24, 5)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Tangent",
+    "references": "(24, 19)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(26, 7)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(27, 21)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": -0.011142263527168938,
+      "y": 0.030665682967756038
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(28, 9)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(28, 5)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Arc",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.011894976896370583,
+      "yCenter": 0.03329213631308664,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.002,
+      "startParam": -2.0412095208454906,
+      "endParam": -0.6087853714357027
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Tangent",
+    "references": "(29, 5)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Tangent",
+    "references": "(29, 9)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(31, 10)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(32, 8)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": -0.015599168938036513,
+      "y": 0.03293195615485845
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(33, 9)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(33, 1)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Arc",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.012794397819268728,
+      "yCenter": 0.033749479095482864,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0020000000000000005,
+      "startParam": -3.741398865145856,
+      "endParam": -2.0412095208454906
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Tangent",
+    "references": "(34, 1)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Tangent",
+    "references": "(34, 9)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(34, 29)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(36, 4)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(37, 11)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]
