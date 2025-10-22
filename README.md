@@ -4,6 +4,11 @@ Ops to Loops
 ```
 python scripts/ops_to_loops.py examples/seq_90193/ops.json --debug
 ```
+To run in parallel:
+
+```
+python scripts/ops_to_loops.py --multi_json examples/
+```
 
 Loops to CadQuery
 ```

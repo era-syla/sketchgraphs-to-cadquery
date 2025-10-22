@@ -189,7 +189,7 @@ def main():
 
     # Save the CadQuery code to a file
     import os
-    output_path = os.path.join(os.path.dirname(args.json), "cadquery.py")
+    output_path = os.path.join(os.path.dirname(args.json), "cq_code.py")
     with open(output_path, "w") as f:
         f.write(cadquery_code)
     print(f"Saved CadQuery code to: {output_path}")

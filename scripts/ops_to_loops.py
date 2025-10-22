@@ -15,11 +15,32 @@ Example:
 import argparse, json, sys, os
 from math import cos, sin, atan2, degrees
 import math
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from tqdm import tqdm
 
 import os  # (if not already imported)
 
 import math
 from typing import List, Dict, Tuple, Any
+
+def get_multi_json_files(folder_path: str) -> List[str]:
+    """
+    Recursively find all files named 'ops.json' in any subdirectory of folder_path.
+
+    Args:
+        folder_path: Root folder to search in
+
+    Returns:
+        List of absolute paths to all ops.json files found
+    """
+    ops_json_files = []
+
+    for root, dirs, files in os.walk(folder_path):
+        if "ops.json" in files:
+            abs_path = os.path.abspath(os.path.join(root, "ops.json"))
+            ops_json_files.append(abs_path)
+
+    return ops_json_files
 
 
 def round_point(point: Tuple[float, float], decimals: int) -> Tuple[float, float]:
@@ -217,8 +238,10 @@ def features_to_cadquery(features, loop_name="loop0", workplane_name="wp_sketch0
 
 def parse_args():
     p = argparse.ArgumentParser(description="Generate CadQuery code from ops.json")
-    p.add_argument("ops_json", help="Path to ops.json (list or {'ops': [...]})")
+    p.add_argument("--single_json", default=None, help="Path to ops.json (list or {'ops': [...]})")
+    p.add_argument("--multi_json_folder", default=None, help="Path to ops.json (list or {'ops': [...]})")
     p.add_argument("--debug", action="store_true", help="Enable debug output")
+    p.add_argument("--workers", type=int, default=8, help="Number of parallel workers for processing (default: 8)")
     return p.parse_args()
 
 def load_ops(path):
@@ -307,11 +330,10 @@ def get_arc_feature(params):
             "mid": (mid_x, mid_y),
             "end": (end_x, end_y)
         }
-
-def main():
-    args = parse_args()
-    ops = load_ops(args.ops_json)
     
+def run_single(json_path, debug=False):
+    ops = load_ops(json_path)
+
     # Get the relevant ops
     relevant_ops = []
     for n in ops:
@@ -328,7 +350,7 @@ def main():
         elif label == "Circle":
             relevant_ops.append(n)
     
-    if args.debug:
+    if debug:
         print("RAW OPS")
         print("*" * 40)
         for op in relevant_ops:
@@ -347,7 +369,7 @@ def main():
         else:
             raise ValueError(f"Unknown feature label: {feature['label']}")
     
-    if args.debug:
+    if debug:
         print("START END FEATURES")
         print("*" * 40)
         for op in start_end_features:
@@ -358,16 +380,16 @@ def main():
     closed_loops = find_closed_loops(start_end_features)
 
     # Write the closed loops to a json
-    input_dir = os.path.dirname(os.path.abspath(args.ops_json))
+    input_dir = os.path.dirname(os.path.abspath(json_path))
     output_path = os.path.join(input_dir, "loops.json")
     with open(output_path, "w") as f:
         json.dump(closed_loops, f, indent=2)
 
-    if args.debug:
+    if debug:
         print(f"Wrote {len(closed_loops)} loop(s) to {output_path}")
     
     
-    if args.debug:
+    if debug:
         print("CLOSED LOOPS")
         print("*" * 40)
         print(f"Found {len(closed_loops)} closed loop(s):\n")
@@ -376,8 +398,8 @@ def main():
             for feature in loop:
                 print(" ", feature)
         print("*" * 40)
-        
-    if args.debug:
+
+    if debug:
         print("CADQUERY TEST")
         print("*" * 40)
         print(f"Found {len(closed_loops)} closed loop(s):\n")
@@ -387,6 +409,33 @@ def main():
             for j, feature in enumerate(loop):
                 print(feature_to_cadquery(feature, loop_name=f"loop{i}_{j}", workplane_name="wp_sketch0"))
         print("*" * 40)
+    return
+
+def main():
+    args = parse_args()
+
+    # Check if neither argument is provided
+    if args.single_json is None and args.multi_json_folder is None:
+        print("Error: Please provide either --single_json or --multi_json_folder argument", file=sys.stderr)
+        sys.exit(1)
+
+    # If single_json is provided, use run_single
+    if args.single_json is not None:
+        run_single(args.single_json, debug=args.debug)
+
+    # If multi_json_folder is provided, show not yet implemented error
+    if args.multi_json_folder is not None:
+        input_jsons = get_multi_json_files(args.multi_json_folder)
+
+        with ProcessPoolExecutor(max_workers=args.workers) as executor:
+
+            # Submit all tasks
+            future_to_item = {executor.submit(run_single, str(item)): item for item in input_jsons}
+            for future in tqdm(as_completed(future_to_item), total=len(input_jsons),
+                            desc=f"Processing {run_single.__name__}"):
+                result = future.result()
+    
+
 
 if __name__ == "__main__":
     main()
