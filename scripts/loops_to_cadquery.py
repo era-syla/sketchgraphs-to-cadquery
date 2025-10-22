@@ -15,14 +15,39 @@ bbox = {}.val().BoundingBox()
 import argparse
 import json
 import random
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from tqdm import tqdm
 
 OFFSET_DISTANCE = 0.5  # Distance to offset the revolve axis from the bounding box
 
 
+def get_multi_json_files(folder_path):
+    """
+    Recursively find all files named 'loops.json' in any subdirectory of folder_path.
+
+    Args:
+        folder_path: Root folder to search in
+
+    Returns:
+        List of absolute paths to all loops.json files found
+    """
+    import os
+    loops_json_files = []
+
+    for root, dirs, files in os.walk(folder_path):
+        if "loops.json" in files:
+            abs_path = os.path.abspath(os.path.join(root, "loops.json"))
+            loops_json_files.append(abs_path)
+
+    return loops_json_files
+
+
 def parse_args():
     p = argparse.ArgumentParser(description="Generate CadQuery code from loops.json")
-    p.add_argument("--json", required=True, help="Path to loops.json file")
+    p.add_argument("--single_json", default=None, help="Path to a single loops.json file")
+    p.add_argument("--multi_json_folder", default=None, help="Path to folder containing multiple loops.json files (will search recursively)")
     p.add_argument("--debug", action="store_true", help="Enable debug output")
+    p.add_argument("--workers", type=int, default=8, help="Number of parallel workers for processing (default: 8)")
     return p.parse_args()
 
 def load_loops(path):
@@ -158,13 +183,12 @@ def perform_3d_op_on_loop(loop_name, sketch_name, code_thus_far, plane_name):
         print(start_point, end_point)
         return f"solid={sketch_name}.add({loop_name}).revolve(angle={angle}, axis=({start_point}, {end_point}))\n"
 
-def main():
-    args = parse_args()
-    loops = load_loops(args.json)
+def run_single(loops_json_path, debug=False):
+    loops = load_loops(loops_json_path)
     cadquery_code = "import cadquery as cq\n"
 
-    if args.debug:
-        print(f"Loaded {len(loops)} loop(s) from {args.json}")
+    if debug:
+        print(f"Loaded {len(loops)} loop(s) from {loops_json_path}")
         for i, loop in enumerate(loops):
             print(f"Loop {i}: {len(loop)} features")
     
@@ -183,18 +207,55 @@ def main():
         cadquery_code += loop_cq
         cadquery_code += perform_3d_op_on_loop("loop0", wp_name, cadquery_code, plane)
         
-        if args.debug:
+        if debug:
             print("*"*50)
             print(cadquery_code)
 
     # Save the CadQuery code to a file
     import os
-    output_path = os.path.join(os.path.dirname(args.json), "cq_code.py")
+    output_path = os.path.join(os.path.dirname(loops_json_path), "cq_code.py")
     with open(output_path, "w") as f:
         f.write(cadquery_code)
     print(f"Saved CadQuery code to: {output_path}")
+    return
 
+def main():
+    import sys
+    args = parse_args()
+
+    # Check if neither argument is provided
+    if args.single_json is None and args.multi_json_folder is None:
+        print("Error: Please provide either --single_json or --multi_json_folder argument", file=sys.stderr)
+        sys.exit(1)
+
+    # If single_json is provided, use run_single
+    if args.single_json is not None:
+        run_single(args.single_json, debug=args.debug)
+
+    # If multi_json_folder is provided, process all loops.json files in parallel
+    if args.multi_json_folder is not None:
+        input_jsons = get_multi_json_files(args.multi_json_folder)
+        failed_files = []
+
+        with ProcessPoolExecutor(max_workers=args.workers) as executor:
+
+            # Submit all tasks
+            future_to_item = {executor.submit(run_single, str(item)): item for item in input_jsons}
+            for future in tqdm(as_completed(future_to_item), total=len(input_jsons),
+                            desc=f"Processing {run_single.__name__}"):
+                item = future_to_item[future]
+                try:
+                    result = future.result()
+                except Exception as e:
+                    failed_files.append((item, str(e)))
+                    if args.debug:
+                        print(f"\nError processing {item}: {e}")
+
+        # Report summary at the end
+        if failed_files:
+            print(f"\n{len(failed_files)} file(s) failed to process:")
+            for item, error in failed_files:
+                print(f"  - {item}: {error}")
 
 if __name__ == "__main__":
-
     main()
