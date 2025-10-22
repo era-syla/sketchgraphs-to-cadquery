@@ -1,0 +1,85 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": 0.0,
+      "yCenter": 0.18085126577156838,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.006200000000000001
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Concentric",
+    "references": "(1, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(1,)",
+    "parameters": {
+      "length": "#rond"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Vertical",
+    "references": "(2, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": 0.0,
+      "yCenter": 0.18085126577156838,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0102
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Distance",
+    "references": "(3, 1)",
+    "parameters": {
+      "direction": "MINIMUM",
+      "length": "#ecart_rond",
+      "halfSpace0": "RIGHT",
+      "halfSpace1": "LEFT"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(4, 2)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

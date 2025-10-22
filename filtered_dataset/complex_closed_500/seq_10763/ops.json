@@ -1,0 +1,103 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": -0.002057732474393282,
+      "dirY": -0.9999978828662908,
+      "pntX": 0.014903635407010781,
+      "pntY": -0.015057103391047585,
+      "startParam": -0.013404403798930629,
+      "endParam": 0.013404403798930629
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(2, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(3, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": -0.9353397857086753,
+      "dirY": -0.3537505975549006,
+      "pntX": 0.014943751523957991,
+      "pntY": -0.01495885563473115,
+      "startParam": -0.013986611149364852,
+      "endParam": 0.013986611149364853
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(5, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(6, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": 0.014903806487922314,
+      "y": -0.01497396306476126
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(7, 4)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(7, 1)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

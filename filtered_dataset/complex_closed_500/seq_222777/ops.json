@@ -1,0 +1,430 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": 1.0,
+      "dirY": 0.0,
+      "pntX": 0.031671199947595596,
+      "pntY": 0.0,
+      "startParam": -0.031671199947595596,
+      "endParam": 0.0283288000524044
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(2, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": 1.0,
+      "dirY": 0.0,
+      "pntX": 0.031671199947595596,
+      "pntY": 0.031,
+      "startParam": -0.0316711999475956,
+      "endParam": 0.0283288000524044
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Parallel",
+    "references": "(4, 1)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Horizontal",
+    "references": "(4,)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Distance",
+    "references": "(4, 1)",
+    "parameters": {
+      "direction": "MINIMUM",
+      "length": "0.031 METER",
+      "halfSpace0": "RIGHT",
+      "halfSpace1": "LEFT"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": 0.0,
+      "dirY": 1.0,
+      "pntX": 0.0,
+      "pntY": 0.014779891818761826,
+      "startParam": -0.014779891818761826,
+      "endParam": 0.016220108181238174
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Perpendicular",
+    "references": "(7, 4)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(8, 2)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(9, 5)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": -1.8369701987210297e-16,
+      "dirY": 1.0,
+      "pntX": 0.06,
+      "pntY": 0.014779891818761826,
+      "startParam": -0.014779891818761826,
+      "endParam": 0.016220108181238174
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Parallel",
+    "references": "(10, 7)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Distance",
+    "references": "(10, 7)",
+    "parameters": {
+      "direction": "MINIMUM",
+      "length": "0.06 METER",
+      "halfSpace0": "RIGHT",
+      "halfSpace1": "LEFT"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(11, 3)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(12, 6)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": 0.0,
+      "y": 0.0155
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Midpoint",
+    "references": "(13, 7)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": 0.0,
+      "dirY": -1.0,
+      "pntX": 0.0,
+      "pntY": -0.0007527171298861504,
+      "startParam": -0.01625271712988615,
+      "endParam": 0.00774728287011385
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Vertical",
+    "references": "(14,)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(15, 13)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": -1.0,
+      "dirY": 0.0,
+      "pntX": -0.01512228325009346,
+      "pntY": -0.0085,
+      "startParam": -0.01512228325009346,
+      "endParam": 0.009877716749906538
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(18, 16)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": -1.0,
+      "dirY": -1.2246467991473532e-16,
+      "pntX": -0.01487771674990654,
+      "pntY": 0.032499999999999994,
+      "startParam": -0.014877716749906539,
+      "endParam": 0.010122283250093464
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Parallel",
+    "references": "(20, 17)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Horizontal",
+    "references": "(20,)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Distance",
+    "references": "(20, 17)",
+    "parameters": {
+      "direction": "MINIMUM",
+      "length": "0.041 METER",
+      "halfSpace0": "LEFT",
+      "halfSpace1": "RIGHT"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": 0.0,
+      "dirY": 1.0,
+      "pntX": 0.0,
+      "pntY": 0.016236414432525634,
+      "startParam": -0.024736414432525635,
+      "endParam": 0.016263585567474367
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Perpendicular",
+    "references": "(23, 20)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(24, 18)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(25, 21)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": false,
+      "dirX": -1.8369701987210297e-16,
+      "dirY": 1.0,
+      "pntX": -0.025,
+      "pntY": 0.016236414432525634,
+      "startParam": -0.024736414432525642,
+      "endParam": 0.01626358556747436
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Parallel",
+    "references": "(26, 23)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Distance",
+    "references": "(26, 23)",
+    "parameters": {
+      "direction": "MINIMUM",
+      "length": "0.025 METER",
+      "halfSpace0": "LEFT",
+      "halfSpace1": "RIGHT"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(27, 19)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(28, 22)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.024999999999999998,
+      "yCenter": -0.008500000000000008,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.048
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(29,)",
+    "parameters": {
+      "length": "0.096 METER"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(30, 19)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

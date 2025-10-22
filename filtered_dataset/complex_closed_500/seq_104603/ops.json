@@ -1,0 +1,79 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": 0.0,
+      "dirY": -1.0,
+      "pntX": 0.0,
+      "pntY": -0.011704957112669945,
+      "startParam": -0.011704957112669945,
+      "endParam": 0.012295042887330056
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Vertical",
+    "references": "(1,)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(2, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": 0.0,
+      "yCenter": -0.024,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0025
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(4,)",
+    "parameters": {
+      "length": "0.005 METER"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(5, 3)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

@@ -1,0 +1,396 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": 1.0,
+      "dirY": 1.8369701987210297e-16,
+      "pntX": -0.026152641259431838,
+      "pntY": 0.038250000000000034,
+      "startParam": -0.026707358740568166,
+      "endParam": 0.015202641259431833
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Perpendicular",
+    "references": "(1, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": 1.0,
+      "dirY": 1.8369701987210297e-16,
+      "pntX": -0.05044755976945161,
+      "pntY": -0.027849999999999965,
+      "startParam": -0.005652440230548381,
+      "endParam": 0.04273755976945162
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Perpendicular",
+    "references": "(4, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.05609999999999999,
+      "yCenter": -0.027849999999999965,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.002625
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(8, 5)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.0077099999999999886,
+      "yCenter": -0.027849999999999958,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.002625
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(10, 6)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.052860000000000004,
+      "yCenter": 0.03825000000000003,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.002625
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(11,)",
+    "parameters": {
+      "length": "0.00525 METER"
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(11, 9)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(11, 7)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.010950000000000005,
+      "yCenter": 0.038250000000000034,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.002625
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(13, 11)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(14, 3)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.052860000000000004,
+      "yCenter": 0.03825000000000003,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0015
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(15,)",
+    "parameters": {
+      "length": "0.003 METER"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(16, 2)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(16, 12)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.010950000000000005,
+      "yCenter": 0.038250000000000034,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0015
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(18, 3)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.05609999999999999,
+      "yCenter": -0.027849999999999965,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0015
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(19, 17)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(19, 15)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(20, 8)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.0077099999999999886,
+      "yCenter": -0.027849999999999958,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.0015
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(21, 19)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(22, 6)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": 1.2246467991473532e-16,
+      "dirY": -1.0,
+      "pntX": -0.05286,
+      "pntY": 0.005200000000000031,
+      "startParam": -0.033049999999999996,
+      "endParam": 0.033049999999999996
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Vertical",
+    "references": "(23,)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(24, 2)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(25, 4)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": 0.0,
+      "dirY": -1.0,
+      "pntX": -0.010950000000000001,
+      "pntY": 6.938893903907228e-18,
+      "startParam": -0.03825000000000003,
+      "endParam": 0.027849999999999965
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Vertical",
+    "references": "(26,)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(27, 3)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Coincident",
+    "references": "(28, 4)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

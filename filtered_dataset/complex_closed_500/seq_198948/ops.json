@@ -1,0 +1,44 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": 0.1855,
+      "yCenter": 2.449212707644757e-19,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.004
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Radius",
+    "references": "(1,)",
+    "parameters": {
+      "length": "0.004 METER"
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Horizontal",
+    "references": "(2, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.05715,
+      "yCenter": 0.0154,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.004325
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Concentric",
+    "references": "(1, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Circle",
+    "parameters": {
+      "isConstruction": false,
+      "clockwise": false,
+      "xCenter": -0.01905,
+      "yCenter": 0.0154,
+      "xDir": 1.0,
+      "yDir": 0.0,
+      "radius": 0.004325
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Concentric",
+    "references": "(3, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Diameter",
+    "references": "(3,)",
+    "parameters": {
+      "length": "0.00865 METER"
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Equal",
+    "references": "(3, 1)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Center",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

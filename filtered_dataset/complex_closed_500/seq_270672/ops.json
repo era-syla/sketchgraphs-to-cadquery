@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "NodeOp",
+    "label": "External",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Line",
+    "parameters": {
+      "isConstruction": true,
+      "dirX": 0.9999814100962321,
+      "dirY": 0.006097496367472832,
+      "pntX": 0.1493246170491205,
+      "pntY": 0.0361244528972653,
+      "startParam": -0.027159391040487774,
+      "endParam": 0.027159391040487774
+    }
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_Start",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "SN_End",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Pierce",
+    "references": "(3, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": 0.1764842324796819,
+      "y": 0.0361170325521908
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Pierce",
+    "references": "(4, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": 0.12216653156927793,
+      "y": 0.03542192712169582
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Pierce",
+    "references": "(5, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Point",
+    "parameters": {
+      "isConstruction": false,
+      "x": 0.12216493022891922,
+      "y": 0.03649577009641048
+    }
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Pierce",
+    "references": "(6, 0)",
+    "parameters": {}
+  },
+  {
+    "kind": "EdgeOp",
+    "label": "Midpoint",
+    "references": "(6, 5, 2)",
+    "parameters": {}
+  },
+  {
+    "kind": "NodeOp",
+    "label": "Stop",
+    "parameters": {}
+  }
+]

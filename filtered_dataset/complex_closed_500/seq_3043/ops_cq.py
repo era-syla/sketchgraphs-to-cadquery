@@ -1,0 +1,142 @@
+# ============================================================
+# Auto-generated CadQuery reconstruction from:
+#   /Users/erasyla/SketchGraphs/SketchGraphs-1/filtered_dataset/complex_closed_500/seq_3043/ops.json
+#
+# This script rebuilds the 2D sketch (lines, arcs, circles),
+# assembles closed wires (with tiny gap-bridging), forms faces
+# (outer + holes), and extrudes the largest face by EXTRUDE_HEIGHT_MM.
+# ============================================================
+import cadquery as cq
+from cadquery import Vector, Edge, Wire, Face
+
+EXTRUDE_HEIGHT_MM = 3.0
+
+DEBUG = True
+def dprint(*a, **k):
+    if DEBUG: print(*a, **k)
+
+# ---- 1) Edge and circle specs (all in millimeters, centered) ----
+# Each loop is a list of items:
+#   ('line', (x0,y0,0), (x1,y1,0)) OR ('arc', (x0,y0,0), (xm,ym,0), (x1,y1,0))
+LOOPS = [[['line', (-27.569564712989255, -13.82608107755166, 0.0), (-25.04430651408381, 0.5881923255910486, 0.0)], ['line', (-25.04430651408381, 0.5881923255910486, 0.0), (-47.36523263428284, -0.4935380431349626, 0.0)], ['arc', (-47.36523263428283, -0.4935380431349626, 0.0), (-46.60299315755375, 3.9424344142354255, 0.0), (-27.569564712989255, -13.82608107755166, 0.0)]]]
+
+# Circles are separate closed wires:
+CIRCLES = []
+
+# ---- 2) Build CQ Edges from specs ----
+def build_edges_from_loop(loop):
+    edges = []
+    for item in loop:
+        if item[0] == 'line':
+            _, p0, p1 = item
+            edges.append(Edge.makeLine(Vector(*p0), Vector(*p1)))
+        else:
+            _, p0, pm, p1 = item
+            edges.append(Edge.makeThreePointArc(Vector(*p0), Vector(*pm), Vector(*p1)))
+    return edges
+
+# ---- 3) Assemble wires (each loop -> one wire) ----
+def loop_to_wire(loop):
+    edges = build_edges_from_loop(loop)
+    # keep original curves (arcs preserved)
+    try:
+        w = Wire.makeWire(edges)
+        return w
+    except Exception as e:
+        dprint("Wire.makeWire failed:", e)
+        # fallback: try assembleEdges (may split into list)
+        try:
+            ww = Wire.assembleEdges(edges)
+            if isinstance(ww, list):
+                return [wi for wi in ww if wi]
+            return [ww] if ww else []
+        except Exception as e2:
+            dprint("Wire.assembleEdges failed:", e2)
+            return []
+
+def build_all_wires():
+    wires = []
+    for loop in LOOPS:
+        w = loop_to_wire(loop)
+        if not w: 
+            continue
+        if isinstance(w, list):
+            wires.extend(w)
+        else:
+            wires.append(w)
+    # add full circles
+    for c in CIRCLES:
+        cx, cy, cz = c["c"]; r = c["r"]
+        try:
+            wires.append(Wire.makeCircle(r, Vector(cx, cy, cz), Vector(0,0,1)))
+        except Exception as e:
+            dprint("Circle wire fail:", e)
+    return wires
+
+# ---- 4) Faces (outer + holes) ----
+def nest_wires(wires):
+    pairs, taken = [], set()
+    for i, w in enumerate(wires):
+        if i in taken: 
+            continue
+        try:
+            oface = Face.makeFromWires(w)
+        except Exception:
+            continue
+        holes = []
+        for j, h in enumerate(wires):
+            if j == i or j in taken:
+                continue
+            try:
+                if oface.isInside(h.startPoint(), 1e-6, True):
+                    holes.append(h); taken.add(j)
+            except Exception:
+                pass
+        pairs.append((w, holes))
+    return pairs
+
+def build_faces(wires):
+    faces = []
+    for outer, holes in nest_wires(wires):
+        try:
+            faces.append(Face.makeFromWires(outer, holes if holes else None))
+        except Exception:
+            try: faces.append(Face.makeFromWires(outer))
+            except Exception: pass
+    return faces
+
+# ---- 5) Extrude largest face ----
+def extrude_largest(faces):
+    if not faces:
+        return None, None
+    areas = [(i, abs(f.Area())) for i, f in enumerate(faces)]
+    areas.sort(key=lambda t: t[1], reverse=True)
+    i0 = areas[0][0]
+    try:
+        solid = cq.Workplane("XY").add(faces[i0]).extrude(EXTRUDE_HEIGHT_MM)
+        # cut inner faces as holes
+        for i, _ in areas[1:]:
+            try:
+                tool = cq.Workplane("XY").add(faces[i]).extrude(99.0, both=True)
+                solid = solid.cut(tool)
+            except Exception as e:
+                dprint("Cut failed for face", i, e)
+        return solid, i0
+    except Exception as e:
+        dprint("Extrude failed:", e)
+        return None, None
+
+# ---- 6) Run ----
+wires = build_all_wires()
+faces = build_faces(wires)
+solid, main_face_idx = extrude_largest(faces)
+
+print({"edges_from_loops": sum(len(l) for l in LOOPS), "n_wires": len(wires), "n_faces": len(faces), "solid": bool(solid)})
+
+# Visualize in CQ-Editor
+try:
+    for i, w in enumerate(wires): show_object(w, name=f"wire_{i}")
+    for i, f in enumerate(faces): show_object(f, name=f"face_{i}", options={"alpha": 0.4})
+    if solid is not None: show_object(solid, name="solid")
+except Exception:
+    pass

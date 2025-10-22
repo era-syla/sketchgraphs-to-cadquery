@@ -1,0 +1,4 @@
+import cadquery as cq
+wp_sketch0 = cq.Workplane('YZ')
+loop0 = wp_sketch0.moveTo(0.15, 1.75).lineTo(0.7, 1.75).lineTo(0.7, 0.05).lineTo(0.15, 0.05).lineTo(0.15, 1.75).close()
+solid=wp_sketch0.add(loop0).extrude(2.746641316265571)
