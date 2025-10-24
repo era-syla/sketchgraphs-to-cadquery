@@ -11,6 +11,37 @@ Example:
 BBOX_TEMPLATE = '''{}
 bbox = {}.val().BoundingBox()
 '''
+BBOX_FACE_TEMPLATE = '''{}
+ind_face = {}.faces()
+bbox = ind_face.BoundingBox()
+'''
+
+TEMPLATE_FUNCTIONS = '''
+def intersect_face(loop0, loop1):
+    wire0 = loop0.wires().val()
+    wire1 = loop1.wires().val()
+    face0 = cq.cq.wiresToFaces([wire0])[0]
+    face1 = cq.cq.wiresToFaces([wire1])[0]
+    face_intersection = face1.intersect(face0)
+    return face_intersection
+
+def union_loops(loop0, loop1):
+    wire0 = loop0.wires().val()
+    wire1 = loop1.wires().val()
+    face0 = cq.cq.wiresToFaces([wire0])[0]
+    face1 = cq.cq.wiresToFaces([wire1])[0]
+    union_face = face1.fuse(face0)
+    return union_face
+
+def difference_loops(loop0, loop1):
+    wire0 = loop0.wires().val()
+    wire1 = loop1.wires().val()
+    face0 = cq.cq.wiresToFaces([wire0])[0]
+    face1 = cq.cq.wiresToFaces([wire1])[0]
+    difference_face = face1.cut(face0)
+    return difference_face
+\n
+'''
 
 import argparse
 import json
@@ -58,6 +89,9 @@ def load_loops(path):
         raise ValueError("loops.json must be a list of loops.")
     return loops
 
+def add_template_functions_for_multiple_loops():
+    return TEMPLATE_FUNCTIONS
+
 def get_bbox_loop(code_thus_far, loop_name):
     import cadquery as cq
 
@@ -79,17 +113,43 @@ def get_bbox_loop(code_thus_far, loop_name):
         }
     return None
 
+def get_bbox_face(code_thus_far, face_name):
+    import cadquery as cq
+
+    code_to_run = BBOX_FACE_TEMPLATE.format(code_thus_far, face_name)
+    
+    # Execute the code and extract bbox from namespace
+    namespace = {'cq': cq}
+    exec(code_to_run, namespace)
+    bbox = namespace.get('bbox')
+    if bbox:
+        return {
+            'xmin': bbox.xmin,
+            'ymin': bbox.ymin,
+            'zmin': bbox.zmin,
+            'xmax': bbox.xmax,
+            'ymax': bbox.ymax,
+            'zmax': bbox.zmax
+        }
+    raise NotImplementedError("Bounding box extraction for faces not yet implemented.")
+    return None
+
 def cadquery_loop(loop, loop_name, sketch_plane):
     cadquery = f"{loop_name} = {sketch_plane}"
-
     for i, sketch_feature in enumerate(loop):
-        if i == 0: # For the first feature if it's not a circle, we need to move to the starting point
-            if sketch_feature["sketch_op"] != "Circle":
+        if i == 0: # For the first feature, we need to move to the starting point
+            if sketch_feature["sketch_op"] == "Line" or sketch_feature["sketch_op"] == "Arc":
                 cadquery += f".moveTo({sketch_feature['start'][0]}, {sketch_feature['start'][1]})"
+            elif sketch_feature["sketch_op"] == "Circle":
+                cadquery += f".moveTo({sketch_feature['center'][0]}, {sketch_feature['center'][1]}).circle({sketch_feature['radius']})"
+                cadquery += ".consolidateWires()\n"
+                return cadquery
         if sketch_feature["sketch_op"] == "Line":
             cadquery += f".lineTo({sketch_feature['end'][0]}, {sketch_feature['end'][1]})"
         elif sketch_feature["sketch_op"] == "Arc":
             cadquery += f".threePointArc(({sketch_feature['mid'][0]}, {sketch_feature['mid'][1]}), ({sketch_feature['end'][0]}, {sketch_feature['end'][1]}))"
+        else:
+            raise ValueError(f"Unknown sketch operation: {sketch_feature['sketch_op']}")
     cadquery += ".close()\n"
     return cadquery
 
@@ -165,11 +225,57 @@ def cadquery_sketch(plane_index):
     wp_code = f"{wp_name} = cq.Workplane('{chosen_plane}')\n"
     return wp_code, chosen_plane, wp_name
 
+def handle_multiple_loops(cadquery_loops, sketch_code, full_code_thus_far, merge_op):
+
+    cadquery_code_loop = None
+
+    loop_names = [f"loop{i}" for i in range(len(cadquery_loops))]
+
+    if merge_op == 'intersect':
+        cadquery_code_loop = f"{sketch_code}face = intersect_face({loop_names[0]}, {loop_names[1]})\n"
+        code_test = full_code_thus_far + cadquery_code_loop
+        try:
+            exec(code_test, globals())
+            return cadquery_code_loop
+        except Exception as e:
+            return None
+    elif merge_op == 'union':
+        cadquery_code_loop = f"{sketch_code}face = union_loops({loop_names[0]}, {loop_names[1]})\n"
+        code_test = full_code_thus_far + cadquery_code_loop
+        try:
+            exec(code_test, globals())
+            return cadquery_code_loop
+        except Exception as e:
+            return None
+    elif merge_op == 'difference1':
+        cadquery_code_loop = f"{sketch_code}face = difference_loops({loop_names[0]}, {loop_names[1]})\n"
+        code_test = full_code_thus_far + cadquery_code_loop
+        try:
+            exec(code_test, globals())
+            return cadquery_code_loop
+        except Exception as e:
+            return None
+    elif merge_op == 'difference2':
+        cadquery_code_loop = f"{sketch_code}face = difference_loops({loop_names[1]}, {loop_names[0]})\n"
+        code_test = full_code_thus_far + cadquery_code_loop
+        try:
+            exec(code_test, globals())
+            return cadquery_code_loop
+        except Exception as e:
+            return None
+    else:
+        return None
+
 def perform_3d_op_on_loop(loop_name, sketch_name, code_thus_far, plane_name):
     op_types_3d = ['extrude'] # TODO: add more operations, like loft and sweep
     chosen_op = random.choice(op_types_3d)
     if chosen_op == 'extrude':
-        bbox_values = get_bbox_loop(code_thus_far, loop_name)
+        if "loop" in loop_name:
+            bbox_values = get_bbox_loop(code_thus_far, loop_name)
+        elif "face" in loop_name:
+            bbox_values = get_bbox_face(code_thus_far, loop_name)
+        else:
+            raise ValueError(f"Unknown loop/face name: {loop_name}")
         # Get the max dimension of the boudning box to determine extrusion height
         max_dim = max(bbox_values['xmax'] - bbox_values['xmin'],
                       bbox_values['ymax'] - bbox_values['ymin'],
@@ -185,7 +291,7 @@ def perform_3d_op_on_loop(loop_name, sketch_name, code_thus_far, plane_name):
 
 def run_single(loops_json_path, debug=False):
     loops = load_loops(loops_json_path)
-    cadquery_code = "import cadquery as cq\n"
+    cadquery_code_list = []
 
     if debug:
         print(f"Loaded {len(loops)} loop(s) from {loops_json_path}")
@@ -196,27 +302,67 @@ def run_single(loops_json_path, debug=False):
         print("No loops found in the JSON file.")
         return
     
-    elif len(loops) > 1:
+    elif len(loops) == 2:
+        loop_merge_ops = ['intersect', 'union', 'difference1', 'difference2']
+        for merge_op in loop_merge_ops:
+            cadquery_code = "import cadquery as cq\n"
+            cadquery_code += add_template_functions_for_multiple_loops()
+            sketch_cq, plane, wp_name = cadquery_sketch(0)
+            cadquery_loops = [cadquery_loop(loop, f"loop{i}", wp_name) for i, loop in enumerate(loops)]
+            
+            for cq in cadquery_loops:
+                cadquery_code += sketch_cq
+                cadquery_code += cq + "\n"
+            loop_cq = handle_multiple_loops(cadquery_loops, sketch_cq, cadquery_code, merge_op)
+            if loop_cq is None:
+                continue
+            cadquery_code += loop_cq
+            try:
+                cadquery_code += perform_3d_op_on_loop("face", wp_name, cadquery_code, plane)
+            except Exception as e: # Handle merged loops that do not produce valid faces
+                # print(f"Skipping merge_op {merge_op} due to error: {e}")
+                continue
+            cadquery_code_list.append(cadquery_code)
+
+    elif len(loops) > 2:
         raise NotImplementedError("Multiple loops not yet supported.")
     
     else: # handle single loops
+        cadquery_code = "import cadquery as cq\n"
         loop = loops[0]
         sketch_cq, plane, wp_name = cadquery_sketch(0)
         cadquery_code += sketch_cq
         loop_cq = cadquery_loop(loop, "loop0", wp_name)
         cadquery_code += loop_cq
         cadquery_code += perform_3d_op_on_loop("loop0", wp_name, cadquery_code, plane)
+        cadquery_code_list.append(cadquery_code)
         
         if debug:
             print("*"*50)
             print(cadquery_code)
+            
+    # Run each of the CadQuery code snippets to verify they work, if not remove from list
+    validated_code_list = []
+    for i, code in enumerate(cadquery_code_list):
+        try:
+            exec(code)
+            validated_code_list.append(code)
+            if debug:
+                print(f"Code snippet {i} executed successfully")
+        except Exception as e:
+            if debug:
+                print(f"Code snippet {i} failed: {e}")
 
-    # Save the CadQuery code to a file
+    cadquery_code_list = validated_code_list
+
+    # Save the CadQuery code to files
     import os
-    output_path = os.path.join(os.path.dirname(loops_json_path), "cq_code.py")
-    with open(output_path, "w") as f:
-        f.write(cadquery_code)
-    print(f"Saved CadQuery code to: {output_path}")
+    output_dir = os.path.dirname(loops_json_path)
+    for i, code in enumerate(cadquery_code_list):
+        output_path = os.path.join(output_dir, f"cq_code_{i}.py")
+        with open(output_path, "w") as f:
+            f.write(code)
+        # print(f"Saved CadQuery code to: {output_path}")
     return
 
 def main():
